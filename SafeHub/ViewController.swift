@@ -9,7 +9,17 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    
+    @IBOutlet weak var userName: UITextField!
+    @IBOutlet weak var userPassword: UITextField!
+    
+    @IBAction func tappedLoginButton(_ sender: Any) {
+    }
+    
+    @IBOutlet weak var tappedSignUpButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

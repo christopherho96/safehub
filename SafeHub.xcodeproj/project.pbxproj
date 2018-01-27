@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DD170567B285DBF07EB7EEB /* Pods_SafeHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1B6BC246484B0C8DEAD14C /* Pods_SafeHub.framework */; };
+		FE1D583B201D0A05006795DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE1D583A201D0A05006795DF /* GoogleService-Info.plist */; };
 		FE5E2871201CF3BC0031BE12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E2870201CF3BC0031BE12 /* AppDelegate.swift */; };
 		FE5E2873201CF3BC0031BE12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E2872201CF3BC0031BE12 /* ViewController.swift */; };
 		FE5E2876201CF3BC0031BE12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE5E2874201CF3BC0031BE12 /* Main.storyboard */; };
@@ -15,6 +17,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F1B6BC246484B0C8DEAD14C /* Pods_SafeHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SafeHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A33BAABE577BFE1D9B32007C /* Pods-SafeHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SafeHub.release.xcconfig"; path = "Pods/Target Support Files/Pods-SafeHub/Pods-SafeHub.release.xcconfig"; sourceTree = "<group>"; };
+		A70ECFB0098DDB7388454F07 /* Pods-SafeHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SafeHub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SafeHub/Pods-SafeHub.debug.xcconfig"; sourceTree = "<group>"; };
+		FE1D583A201D0A05006795DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FE5E286D201CF3BC0031BE12 /* SafeHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SafeHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE5E2870201CF3BC0031BE12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE5E2872201CF3BC0031BE12 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,17 +35,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DD170567B285DBF07EB7EEB /* Pods_SafeHub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		403E1192A9FC44D06ED5340A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7F1B6BC246484B0C8DEAD14C /* Pods_SafeHub.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FD2B5DABBE5F7A2DD20C0626 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A70ECFB0098DDB7388454F07 /* Pods-SafeHub.debug.xcconfig */,
+				A33BAABE577BFE1D9B32007C /* Pods-SafeHub.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		FE5E2864201CF3BC0031BE12 = {
 			isa = PBXGroup;
 			children = (
 				FE5E286F201CF3BC0031BE12 /* SafeHub */,
 				FE5E286E201CF3BC0031BE12 /* Products */,
+				FD2B5DABBE5F7A2DD20C0626 /* Pods */,
+				403E1192A9FC44D06ED5340A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +86,7 @@
 				FE5E2877201CF3BC0031BE12 /* Assets.xcassets */,
 				FE5E2879201CF3BC0031BE12 /* LaunchScreen.storyboard */,
 				FE5E287C201CF3BC0031BE12 /* Info.plist */,
+				FE1D583A201D0A05006795DF /* GoogleService-Info.plist */,
 			);
 			path = SafeHub;
 			sourceTree = "<group>";
@@ -71,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FE5E287F201CF3BC0031BE12 /* Build configuration list for PBXNativeTarget "SafeHub" */;
 			buildPhases = (
+				0D6E76BA236951B49A1406ED /* [CP] Check Pods Manifest.lock */,
 				FE5E2869201CF3BC0031BE12 /* Sources */,
 				FE5E286A201CF3BC0031BE12 /* Frameworks */,
 				FE5E286B201CF3BC0031BE12 /* Resources */,
+				7FFF2D2DD8F7B603BC54B576 /* [CP] Embed Pods Frameworks */,
+				5A6C6617FBBAFB8B8A19F2A4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -124,12 +154,69 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE5E287B201CF3BC0031BE12 /* LaunchScreen.storyboard in Resources */,
+				FE1D583B201D0A05006795DF /* GoogleService-Info.plist in Resources */,
 				FE5E2878201CF3BC0031BE12 /* Assets.xcassets in Resources */,
 				FE5E2876201CF3BC0031BE12 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0D6E76BA236951B49A1406ED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SafeHub-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5A6C6617FBBAFB8B8A19F2A4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SafeHub/Pods-SafeHub-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7FFF2D2DD8F7B603BC54B576 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SafeHub/Pods-SafeHub-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SafeHub/Pods-SafeHub-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FE5E2869201CF3BC0031BE12 /* Sources */ = {
@@ -272,6 +359,7 @@
 		};
 		FE5E2880201CF3BC0031BE12 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A70ECFB0098DDB7388454F07 /* Pods-SafeHub.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -287,6 +375,7 @@
 		};
 		FE5E2881201CF3BC0031BE12 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A33BAABE577BFE1D9B32007C /* Pods-SafeHub.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
