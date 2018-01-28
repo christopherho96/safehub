@@ -22,16 +22,16 @@ class ViewController: UIViewController {
             }else{
                 print("succesfully logged in")
                 print(user!)
-                self.performSegue(withIdentifier: "segueToHomePage", sender: self)
+                self.performSegue(withIdentifier: "segueToHomePage", sender: nil)
             }
         }
     }
     
-    @IBOutlet weak var tappedSignUpButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 

@@ -50,11 +50,11 @@ class SignUpViewController: UIViewController {
                 print(error!)
             }else{
                 let speechDB = Database.database().reference().child("Users").child((Auth.auth().currentUser?.uid)!)
-                let speechDictionary = ["user": Auth.auth().currentUser?.email, "recordedPassword": self.bestString, "uid": Auth.auth().currentUser?.uid, "motorID" : "1", "passwordMatch" : "false" ]
+                let speechDictionary = ["user": Auth.auth().currentUser?.email, "recordedPassword": self.bestString, "uid": Auth.auth().currentUser?.uid, "motorID" : "1", "passwordMatch" : "false", "needToLock":"false" ]
                 speechDB.setValue(speechDictionary)
                 print("succesfully logged in")
                 print(user!)
-                self.performSegue(withIdentifier: "segueToHomePage", sender: self)
+                self.performSegue(withIdentifier: "segueToHomePage", sender: nil)
             }
         }
     }

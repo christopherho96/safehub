@@ -10,22 +10,59 @@ import UIKit
 import Firebase
 import Speech
 import LocalAuthentication
+import MapKit
+import CoreLocation
 
-class HomePageViewController: UIViewController {
+class HomePageViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate  {
     
-    let audioEngine = AVAudioEngine()
-    let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
-    let request = SFSpeechAudioBufferRecognitionRequest()
-    var recognitionTask: SFSpeechRecognitionTask?
-
-    @IBOutlet weak var isPasswordCorrectLabel: UILabel!
-    @IBOutlet weak var detailedTextLabel: UILabel!
-    @IBAction func tappedVoiceRecognition(_ sender: Any) {
-        self.recordAndRecognizeSpeech()
-        //performSegue(withIdentifier:         "segueToVoiceRecognition", sender: self)
-    }
+    @IBOutlet weak var Map: MKMapView!
+    
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var detailView: UIView!
+    
+    var count = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        
+        Map.delegate = self
+        detailView.layer.masksToBounds = true
+        detailView.layer.cornerRadius = CGFloat(5)
+        
+        userName.text = "Welcome " + (Auth.auth().currentUser?.email!)!
+        
+        let location = CLLocationCoordinate2DMake(43.6532, 79.3832)
+        
+        //this span controls how zoomed in the view is
+        let span = MKCoordinateSpanMake(0.01, 0.01)
+        
+        let region = MKCoordinateRegion(center: location, span: span)
+        
+        Map.setRegion(region, animated: true)
+        
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location
+        annotation.title = "Test"
+        annotation.subtitle = "TEST"
+        Map.addAnnotation(annotation)
+        
+        let lockersDB = Database.database().reference()
+        lockersDB.child("Lockers").queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
+            if let dict = snapshot.value as? NSDictionary, let postContent = dict["isTaken"] as? String {
+                
+                let locker = Locker()
+                locker.lockerNumber = "locker\(self.count)"
+                locker.lockerAvailable = postContent
+                lockers.append(locker)
+                self.count = self.count + 1
+                
+            } else {
+                print("")
+            }
+        })
 
         // Do any additional setup after loading the view.
     }
@@ -36,132 +73,14 @@ class HomePageViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func tappedLogOut(_ sender: Any) {
-        do{
-            try Auth.auth().signOut()
-            self.performSegue(withIdentifier: "segueToLoginPage", sender: self)
-            print("succesfully logged out")
-        }catch{
-            print("error, there was a problem signing out")
-        }
-    }
-    @IBAction func tappedFingerPrintRecognition(_ sender: Any) {
-        authenticateUser()
-    }
-    
-    
-    func recordAndRecognizeSpeech(){
-        
-        //audioEngine uses what are called nodes to process bits of audio
-        
-        let node = audioEngine.inputNode
-        let recordingFormat = node.outputFormat(forBus: 0)
-        node.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, _) in
-            self.request.append(buffer)
-        }
-        audioEngine.prepare()
-        do{
-            try audioEngine.start()
-        }catch{
-            return print("this is the error: \(error)")
-        }
-        
-        guard let myRecognizer = SFSpeechRecognizer() else {
-            // a recognizer is not supported
-            return
-        }
-        
-        if !myRecognizer.isAvailable {
-            // a recognizer is not available
-            return
-        }
-        
-        recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { (result, error) in
-            if let result = result{
-                let bestString = result.bestTranscription.formattedString
-                self.detailedTextLabel.text = bestString
-                
-                var lastString: String = ""
-                for segment in result.bestTranscription.segments{
-                    let indexTo = bestString.index(bestString.startIndex, offsetBy: segment.substringRange.location)
-                    lastString = bestString.substring(from: indexTo)
-                    
-                    let usersDB = Database.database().reference().child("Users")
-                    let updateRef = Database.database().reference().child("Users")
-                    
-                    usersDB.observe(.childAdded) { (snapshot) in
-                        let snapshotValue = snapshot.value as! Dictionary<String,String>
-                        
-                        guard let text = snapshotValue["recordedPassword"] else {return}
-                        if bestString == text {
-                            self.isPasswordCorrectLabel.text = "Correct Password!"
-                            print("stopped recording")
-                            self.audioEngine.stop()
-                            self.audioEngine.inputNode.removeTap(onBus: 0)
-                            self.request.endAudio()
-                            self.recognitionTask?.cancel()
-                            self.recognitionTask = nil
-                            
-                            let key = Auth.auth().currentUser?.uid
-                            
-                            
-                            usersDB.child(key!).updateChildValues(["passwordMatch": "true"])
-                            
-                            
-                            
-                            
-                            usersDB.queryOrderedByKey()
-                            //usersDB.child().setValue(["passwordMatch":"true"])
-                        
-                            //usersDB.childByAutoId().child("passwordMatch").setValue("true")
-                        
-                        
-                        }else{
-                            self.isPasswordCorrectLabel.text = "Wrong Password"
-                        }
-                        
-                    //create new child called text in database
-//                    let speechDB = Database.database().reference().child("text")
-//                    let speechDictionary = ["Sender": Auth.auth().currentUser?.email, "text": lastString]
-//                    speechDB.childByAutoId().setValue(speechDictionary)
-                }
-               // self.checkForColorsSaid(resultString: lastString)
-                
-                }
-            }else if let error = error{
-                print(error)
-            }
-        })
-    }
-    
-    func authenticateUser() {
-        let context = LAContext()
-        var error: NSError?
-        
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "Identify yourself!"
-            
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
-                [unowned self] success, authenticationError in
-                
-                DispatchQueue.main.async {
-                    if success {
-                        //self.runSecretCode()
-                        print("Success scanning fingerprint")
-                    } else {
-                        let ac = UIAlertController(title: "Authentication failed", message: "Sorry!", preferredStyle: .alert)
-                        ac.addAction(UIAlertAction(title: "OK", style: .default))
-                        self.present(ac, animated: true)
-                    }
-                }
-            }
-        } else {
-            let ac = UIAlertController(title: "Touch ID not available", message: "Your device is not configured for Touch ID.", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            present(ac, animated: true)
-        }
-    }
-
-    
+//    @IBAction func tappedLogOut(_ sender: Any) {
+//        do{
+//            try Auth.auth().signOut()
+//            self.performSegue(withIdentifier: "segueToLoginPage", sender: self)
+//            print("succesfully logged out")
+//        }catch{
+//            print("error, there was a problem signing out")
+//        }
+//    }
 
 }
