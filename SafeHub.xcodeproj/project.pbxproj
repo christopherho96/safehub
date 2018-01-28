@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0DD170567B285DBF07EB7EEB /* Pods_SafeHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1B6BC246484B0C8DEAD14C /* Pods_SafeHub.framework */; };
 		FE1D583B201D0A05006795DF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE1D583A201D0A05006795DF /* GoogleService-Info.plist */; };
+		FE1D583D201D0E49006795DF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D583C201D0E49006795DF /* SignUpViewController.swift */; };
+		FE1D583F201D148C006795DF /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D583E201D148C006795DF /* HomePageViewController.swift */; };
+		FE1D5841201D1D37006795DF /* voiceRecognitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1D5840201D1D37006795DF /* voiceRecognitionViewController.swift */; };
 		FE5E2871201CF3BC0031BE12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E2870201CF3BC0031BE12 /* AppDelegate.swift */; };
 		FE5E2873201CF3BC0031BE12 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5E2872201CF3BC0031BE12 /* ViewController.swift */; };
 		FE5E2876201CF3BC0031BE12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE5E2874201CF3BC0031BE12 /* Main.storyboard */; };
@@ -21,6 +24,9 @@
 		A33BAABE577BFE1D9B32007C /* Pods-SafeHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SafeHub.release.xcconfig"; path = "Pods/Target Support Files/Pods-SafeHub/Pods-SafeHub.release.xcconfig"; sourceTree = "<group>"; };
 		A70ECFB0098DDB7388454F07 /* Pods-SafeHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SafeHub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SafeHub/Pods-SafeHub.debug.xcconfig"; sourceTree = "<group>"; };
 		FE1D583A201D0A05006795DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FE1D583C201D0E49006795DF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		FE1D583E201D148C006795DF /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		FE1D5840201D1D37006795DF /* voiceRecognitionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = voiceRecognitionViewController.swift; sourceTree = "<group>"; };
 		FE5E286D201CF3BC0031BE12 /* SafeHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SafeHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE5E2870201CF3BC0031BE12 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE5E2872201CF3BC0031BE12 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +93,9 @@
 				FE5E2879201CF3BC0031BE12 /* LaunchScreen.storyboard */,
 				FE5E287C201CF3BC0031BE12 /* Info.plist */,
 				FE1D583A201D0A05006795DF /* GoogleService-Info.plist */,
+				FE1D583C201D0E49006795DF /* SignUpViewController.swift */,
+				FE1D583E201D148C006795DF /* HomePageViewController.swift */,
+				FE1D5840201D1D37006795DF /* voiceRecognitionViewController.swift */,
 			);
 			path = SafeHub;
 			sourceTree = "<group>";
@@ -203,12 +212,16 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SafeHub/Pods-SafeHub-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -223,8 +236,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE1D583F201D148C006795DF /* HomePageViewController.swift in Sources */,
+				FE1D583D201D0E49006795DF /* SignUpViewController.swift in Sources */,
 				FE5E2873201CF3BC0031BE12 /* ViewController.swift in Sources */,
 				FE5E2871201CF3BC0031BE12 /* AppDelegate.swift in Sources */,
+				FE1D5841201D1D37006795DF /* voiceRecognitionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +381,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8AU59PR2TV;
 				INFOPLIST_FILE = SafeHub/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chovo.SafeHub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -381,6 +398,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8AU59PR2TV;
 				INFOPLIST_FILE = SafeHub/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.chovo.SafeHub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
