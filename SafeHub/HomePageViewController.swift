@@ -19,11 +19,16 @@ class HomePageViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var detailView: UIView!
+    @IBOutlet weak var verifyMethodsLabel: UILabel!
     
+    @IBOutlet weak var uidLabel: UILabel!
+    @IBOutlet weak var currentLocks: UILabel!
     var count = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         self.navigationController?.navigationBar.tintColor = UIColor.white
         
@@ -32,6 +37,8 @@ class HomePageViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         detailView.layer.cornerRadius = CGFloat(5)
         
         userName.text = "Welcome " + (Auth.auth().currentUser?.email!)!
+        uidLabel.text = "UID: " + (Auth.auth().currentUser?.uid)!
+        
         
         let location = CLLocationCoordinate2DMake(43.6532, 79.3832)
         
@@ -56,6 +63,7 @@ class HomePageViewController: UIViewController, MKMapViewDelegate, CLLocationMan
                 let locker = Locker()
                 locker.lockerNumber = "locker\(self.count)"
                 locker.lockerAvailable = postContent
+                locker.assignedTo = (dict["takenBy"] as? String)!
                 lockers.append(locker)
                 self.count = self.count + 1
                 

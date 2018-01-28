@@ -25,16 +25,28 @@ class AvailableLockersViewController: UIViewController,  UITableViewDelegate, UI
         return lockers.count
     }
     
+    var key = Auth.auth().currentUser?.uid
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         
         cell.lockerTitle.text = lockers[indexPath.row].lockerNumber
+        
+        //is avaiable
         if lockers[indexPath.row].lockerAvailable == "false" {
             cell.lockerAvailability.text = "Available"
+
+            
+            //is not available
         }else{
-            cell.lockerAvailability.text = "Reserved"
+            if lockers[indexPath.row].assignedTo == key{
+                cell.lockerAvailability.text = "Reserved For Me"
+                cell.backgroundColor = UIColor(hex: "FCD667")
+            }else{
+            cell.lockerAvailability.text = "Reserved for someone else"
             cell.isUserInteractionEnabled = false
-            cell.backgroundColor = UIColor.gray
+            cell.backgroundColor = UIColor(hex: "ED4D69")
+            }
         }
         
         return cell
@@ -58,6 +70,11 @@ class AvailableLockersViewController: UIViewController,  UITableViewDelegate, UI
     
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        lockerTableView.reloadData()
+
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

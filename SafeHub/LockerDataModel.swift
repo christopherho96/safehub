@@ -11,6 +11,7 @@ import Foundation
 class Locker{
     var lockerNumber : String = ""
     var lockerAvailable : String = ""
+    var assignedTo : String = ""
     
 //    init(lockerNumber: String, lockerAvailable: String) {
 //        self.lockerNumber = lockerNumber
