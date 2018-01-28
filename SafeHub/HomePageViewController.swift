@@ -87,6 +87,8 @@ class HomePageViewController: UIViewController {
                     lastString = bestString.substring(from: indexTo)
                     
                     let usersDB = Database.database().reference().child("Users")
+                    let updateRef = Database.database().reference().child("Users")
+                    
                     usersDB.observe(.childAdded) { (snapshot) in
                         let snapshotValue = snapshot.value as! Dictionary<String,String>
                         
@@ -99,6 +101,11 @@ class HomePageViewController: UIViewController {
                             self.request.endAudio()
                             self.recognitionTask?.cancel()
                             self.recognitionTask = nil
+                            
+                            let key = Auth.auth().currentUser?.uid
+                            
+                            
+                            usersDB.child(key!).updateChildValues(["passwordMatch": "true"])
                             
                             
                             
